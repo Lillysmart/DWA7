@@ -34,6 +34,14 @@ let allHtmlElements = {
 dataSettingOverlay : document.querySelector("[data-settings-overlay]"),
  dataSearchCancel: document.querySelector("[data-search-cancel]"),
  dataSearchOverlay: document.querySelector("[data-search-overlay]"),
+ dataListMessage : document.querySelector("[data-list-message]"),
+  dataSearchForm : document.querySelector("[data-search-form]"),
+   dataSettingForm :document.querySelector("[data-settings-form]"),
+   dataListMessage : document.querySelector("[data-list-message]"),
+   resultList : document.querySelector("[data-list-items]"),
+   showMoreButton : document.querySelector("[data-list-button]"),
+
+
 
 };
 allHtmlElements.dataListItems.appendChild(starting);
@@ -163,7 +171,6 @@ document
 document.querySelector("[data-list-close]").addEventListener("click", () => {
   document.querySelector("[data-list-active]").open = false;
 });
-const dataSettingForm = document.querySelector("[data-settings-form]");
 /**
  * Handles the submission of a form.
  *
@@ -193,9 +200,7 @@ const formHandle = (event) => {
   allHtmlElements.dataSettingOverlay.open = false;
 };
 
-dataSettingForm.addEventListener("submit", formHandle);
-
-const dataSearchForm = document.querySelector("[data-search-form]");
+allHtmlElements.dataSettingForm.addEventListener("submit", formHandle);
 
 const result = [];
 page = 1;
@@ -236,25 +241,20 @@ const filterBooks = (books, filters) => {
     return genreMatch && titleMatch && authorMatch;
   });
 };
-const dataListMessage = document.querySelector("[data-list-message]");
 /**
  * Update the results based on the filtered books.
  *
  * @param {Array} filteredBooks - The array of filtered books.
  */
 const updateResults = (filteredBooks) => {
-  const dataListMessage = document.querySelector("[data-list-message]");
-  const resultList = document.querySelector("[data-list-items]");
-  const showMoreButton = document.querySelector("[data-list-button]");
-
   // Clear the existing results
   resultList.innerHTML = "";
 
   // Check if there are no filtered books
   if (filteredBooks.length === 0) {
-    dataListMessage.classList.add("list__message_show");
+    allHtmlElements.dataListMessage.classList.add("list__message_show");
   } else {
-    dataListMessage.classList.remove("list__message_show");
+    allHtmlElements.dataListMessage.classList.remove("list__message_show");
   }
 
   // Determine the range of books to display based on pagination
@@ -300,7 +300,7 @@ const updateResults = (filteredBooks) => {
   window.scrollTo({ top: 0, behavior: "smooth" });
   allHtmlElements.dataSearchOverlay.open = false;
 };
-dataSearchForm.addEventListener("submit", handleFormSubmission);
+allHtmlElements.dataSearchForm.addEventListener("submit", handleFormSubmission);
 /**
  * Handles the behavior for displaying and updating the list of items.
  *
@@ -337,7 +337,7 @@ const newDataListHandle = () => {
     fragment.appendChild(element);
   }
 
-  dataListItems.appendChild(fragment);
+  allHtmlElements.dataListItems.appendChild(fragment);
   page += 1;
 };
 
