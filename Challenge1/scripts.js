@@ -27,22 +27,19 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 
 let allHtmlElements = {
   dataListItems: document.querySelector("[data-list-items]"),
-   dataSearchGenre : document.querySelector("[data-search-genres]"),
- dataSearchAuthor :document.querySelector("[data-search-authors]"),
-  dataListButton : document.querySelector("[data-list-button]"),
- dataSettingCancel :document.querySelector("[data-settings-cancel]"),
-dataSettingOverlay : document.querySelector("[data-settings-overlay]"),
- dataSearchCancel: document.querySelector("[data-search-cancel]"),
- dataSearchOverlay: document.querySelector("[data-search-overlay]"),
- dataListMessage : document.querySelector("[data-list-message]"),
-  dataSearchForm : document.querySelector("[data-search-form]"),
-   dataSettingForm :document.querySelector("[data-settings-form]"),
-   dataListMessage : document.querySelector("[data-list-message]"),
-   resultList : document.querySelector("[data-list-items]"),
-   showMoreButton : document.querySelector("[data-list-button]"),
-
-
-
+  dataSearchGenre: document.querySelector("[data-search-genres]"),
+  dataSearchAuthor: document.querySelector("[data-search-authors]"),
+  dataListButton: document.querySelector("[data-list-button]"),
+  dataSettingCancel: document.querySelector("[data-settings-cancel]"),
+  dataSettingOverlay: document.querySelector("[data-settings-overlay]"),
+  dataSearchCancel: document.querySelector("[data-search-cancel]"),
+  dataSearchOverlay: document.querySelector("[data-search-overlay]"),
+  dataListMessage: document.querySelector("[data-list-message]"),
+  dataSearchForm: document.querySelector("[data-search-form]"),
+  dataSettingForm: document.querySelector("[data-settings-form]"),
+  dataListMessage: document.querySelector("[data-list-message]"),
+  resultList: document.querySelector("[data-list-items]"),
+  showMoreButton: document.querySelector("[data-list-button]"),
 };
 allHtmlElements.dataListItems.appendChild(starting);
 
@@ -127,7 +124,6 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 }
 */
 
-
 if (matches.length - page * BOOKS_PER_PAGE > 0) {
   //dataListButton.disabled === true && matches.length - page * BOOKS_PER_PAGE;
   allHtmlElements.dataListButton.innerText = ` Show more ${
@@ -150,8 +146,10 @@ if (matches.length - page * BOOKS_PER_PAGE > 0) {
 const handleDatasearchOverlay = () => {
   allHtmlElements.dataSearchOverlay.open = false;
 };
-allHtmlElements.dataSearchCancel.addEventListener("click", handleDatasearchOverlay);
-
+allHtmlElements.dataSearchCancel.addEventListener(
+  "click",
+  handleDatasearchOverlay
+);
 
 allHtmlElements.dataSettingCancel.addEventListener("click", () => {
   allHtmlElementsdataSettingOverlay.open = false;
@@ -248,7 +246,7 @@ const filterBooks = (books, filters) => {
  */
 const updateResults = (filteredBooks) => {
   // Clear the existing results
-  resultList.innerHTML = "";
+  allHtmlElements.resultList.innerHTML = "";
 
   // Check if there are no filtered books
   if (filteredBooks.length === 0) {
@@ -288,8 +286,8 @@ const updateResults = (filteredBooks) => {
 
   // Update the "Show more" button state
   const remainingBooks = filteredBooks.length - endIndex;
-  showMoreButton.disabled = remainingBooks <= 0;
-  showMoreButton.innerHTML = `
+  allHtmlElements.showMoreButton.disabled = remainingBooks <= 0;
+  allHtmlElements.showMoreButton.innerHTML = `
     <span>Show more</span>
     <span class="list__remaining"> (${
       remainingBooks > 0 ? remainingBooks : 0
