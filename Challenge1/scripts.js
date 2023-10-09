@@ -27,6 +27,14 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 
 let allHtmlElements = {
   dataListItems: document.querySelector("[data-list-items]"),
+   dataSearchGenre : document.querySelector("[data-search-genres]"),
+ dataSearchAuthor :document.querySelector("[data-search-authors]"),
+  dataListButton : document.querySelector("[data-list-button]"),
+ dataSettingCancel :document.querySelector("[data-settings-cancel]"),
+dataSettingOverlay : document.querySelector("[data-settings-overlay]"),
+ dataSearchCancel: document.querySelector("[data-search-cancel]"),
+ dataSearchOverlay: document.querySelector("[data-search-overlay]"),
+
 };
 allHtmlElements.dataListItems.appendChild(starting);
 
@@ -44,8 +52,7 @@ for (const [id, name] of Object.entries(genres)) {
   genreHtml.appendChild(element);
 }
 
-const dataSearchGenre = document.querySelector("[data-search-genres]");
-dataSearchGenre.appendChild(genreHtml);
+allHtmlElements.dataSearchGenre.appendChild(genreHtml);
 
 const authorsHtml = document.createDocumentFragment();
 
@@ -60,9 +67,7 @@ for (const [id, name] of Object.entries(authors)) {
   element.innerText = name;
   authorsHtml.appendChild(element);
 }
-
-const dataSearchAuthor = document.querySelector("[data-search-authors]");
-dataSearchAuthor.appendChild(authorsHtml);
+allHtmlElements.dataSearchAuthor.appendChild(authorsHtml);
 /*
 
 /**
@@ -114,11 +119,10 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 }
 */
 
-const dataListButton = document.querySelector("[data-list-button]");
 
 if (matches.length - page * BOOKS_PER_PAGE > 0) {
   //dataListButton.disabled === true && matches.length - page * BOOKS_PER_PAGE;
-  dataListButton.innerText = ` Show more ${
+  allHtmlElements.dataListButton.innerText = ` Show more ${
     matches.length - page * BOOKS_PER_PAGE
   }`;
 } else {
@@ -134,19 +138,15 @@ if (matches.length - page * BOOKS_PER_PAGE > 0) {
     })</span>
 `;
 */
-const dataSearchCancel = document.querySelector("[data-search-cancel]");
-const dataSearchOverlay = document.querySelector("[data-search-overlay]");
 
 const handleDatasearchOverlay = () => {
-  dataSearchOverlay.open = false;
+  allHtmlElements.dataSearchOverlay.open = false;
 };
-dataSearchCancel.addEventListener("click", handleDatasearchOverlay);
+allHtmlElements.dataSearchCancel.addEventListener("click", handleDatasearchOverlay);
 
-const dataSettingCancel = document.querySelector("[data-settings-cancel]");
-const dataSettingOverlay = document.querySelector("[data-settings-overlay]");
 
-dataSettingCancel.addEventListener("click", () => {
-  dataSettingOverlay.open = false;
+allHtmlElements.dataSettingCancel.addEventListener("click", () => {
+  allHtmlElementsdataSettingOverlay.open = false;
 });
 
 document.querySelector("[data-header-search]").addEventListener("click", () => {
@@ -190,7 +190,7 @@ const formHandle = (event) => {
   for (const [property, value] of Object.entries(themeColors)) {
     document.documentElement.style.setProperty(property, value);
   }
-  dataSettingOverlay.open = false;
+  allHtmlElements.dataSettingOverlay.open = false;
 };
 
 dataSettingForm.addEventListener("submit", formHandle);
@@ -298,7 +298,7 @@ const updateResults = (filteredBooks) => {
 
   // Scroll to the top of the page
   window.scrollTo({ top: 0, behavior: "smooth" });
-  dataSearchOverlay.open = false;
+  allHtmlElements.dataSearchOverlay.open = false;
 };
 dataSearchForm.addEventListener("submit", handleFormSubmission);
 /**
@@ -341,7 +341,7 @@ const newDataListHandle = () => {
   page += 1;
 };
 
-dataListButton.addEventListener("click", newDataListHandle);
+allHtmlElements.dataListButton.addEventListener("click", newDataListHandle);
 
 /**
  * Handles the click event on preview items, displaying additional book details.
